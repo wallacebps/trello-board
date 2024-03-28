@@ -32,7 +32,7 @@ onKeyStroke("Backspace", (e) =>{
 
 </script>
 
-<style>
+<style lang="css">
 .sortable-drag .task {
   transform: rotate(5deg);
 }
