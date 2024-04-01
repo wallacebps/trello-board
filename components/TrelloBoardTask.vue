@@ -21,15 +21,14 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
-    (e: "delete", payload: ID) : void
-}>()
+  (e: "delete", payload: ID): void;
+}>();
 
-const focused = ref(false)
+const focused = ref(false);
 
-onKeyStroke("Backspace", (e) =>{
-    if(focused.value) emit("delete", props.task.id)
-} )
-
+onKeyStroke("Backspace", (e) => {
+  if (focused.value) emit("delete", props.task.id);
+});
 </script>
 
 <style lang="css">
@@ -45,8 +44,8 @@ onKeyStroke("Backspace", (e) =>{
 }
 
 .task:focus,
-.tasl:facus-visible{
-    @apply outline-gray-400 !important;
-    outline: gray auto 1px;
+.tasl:facus-visible {
+  @apply outline-gray-400 !important;
+  outline: gray auto 1px;
 }
 </style>
