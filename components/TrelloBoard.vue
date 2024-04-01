@@ -62,7 +62,7 @@ import type { Column, Task } from "~/types";
 import draggable from "vuedraggable";
 import { nanoid } from "nanoid";
 
-const columns = ref<Column[]>([
+const columns = useLocalStorage<Column[]>("trelloBoard", [
   {
     id: nanoid(),
     title: "Backlog",
@@ -109,7 +109,20 @@ const columns = ref<Column[]>([
     title: "Complete",
     tasks: [],
   },
-]);
+],{
+  serializer: {
+    read: (value) => {
+      return JSON.parse(value).map((column: Column) => {
+        column.tasks= column.tasks.map((task: Task) => {
+          task.createdAt = new Date(task.createdAt);
+          return task;
+        });
+        return column;
+      });
+    },
+    write: (value => JSON.stringify(value))
+  }
+});
 
 const alt = useKeyModifier("Alt");
 
